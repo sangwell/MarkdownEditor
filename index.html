@@ -118,12 +118,13 @@
     $('.js-example-basic-single').select2({
         width:'100%',
         placeholder: '添加标签',
+        closeOnSelect:false,
         data: data
     });
-    $('.js-example-basic-single').on('change', function (e) {
+//    $('.js-example-basic-single').on('change', function (e) {
 //        var data = e.params.data;
-        console.log(e);
-    });
+//        console.log(e);
+//    });
 /*    function preview() {
         console.log($('#text-area').val());
     }*/
@@ -133,6 +134,12 @@
         blogScheme.Title = document.getElementById('blog_title').value;
         blogScheme.Content = mdSrc.render(source);
         blogScheme.Date = moment().format('YYYY-MM-DD');
+        var selected = $(".js-example-basic-single").select2("data");
+        var tags = [];
+        selected.forEach((item) => {
+            tags.push(item.text);
+        });
+        blogScheme.Tags = tags.join(',');
         console.log(blogScheme);
     }
 
