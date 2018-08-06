@@ -60,6 +60,11 @@ body {
 .btn-publish:hover{
     background: #28c154;
 }
+.example-page{
+    float: right;
+    margin-top: 37px;
+    cursor: pointer;
+}
 .demo-options {
     margin-bottom: 10px;
 }
