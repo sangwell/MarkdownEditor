@@ -30,7 +30,7 @@
         <span>Markdown Blog</span>
         <ul>
             <li><a>标签</a></li>
-            <li><a>上传图片</a></li>
+            <li><a onclick="openFileUpload()">上传图片</a></li>
         </ul>
         <a class="example-page">语法示例</a>
     </div>
@@ -63,6 +63,21 @@
     <div class="row">
         <div class="col-xs-6">
             <button type="button" class="btn-publish" onclick="publish()">发布</button>
+        </div>
+    </div>
+</div>
+
+<div class="bg-layout" id="file_upload_modal">
+    <div class="modal-layout">
+        <div class="modal-title">
+            <a onclick="closeFileModal()"></a>
+        </div>
+        <div class="upload-input">
+            <input type="file" multiple>
+            <button>上传</button>
+        </div>
+        <div class="show-input">
+            <label>图片地址：</label><input type="text" readonly>
         </div>
     </div>
 </div>
@@ -107,7 +122,14 @@
         closeOnSelect:false,
         data: data
     });
-
+    
+    function openFileUpload() {
+        $('#file_upload_modal').fadeIn();
+    }
+    function closeFileModal() {
+        $('#file_upload_modal').fadeOut();
+    }
+    
     function publish() {
         var source = $('.source').val();
         blogScheme.Id = new Date().getTime();

@@ -65,6 +65,51 @@ body {
     margin-top: 37px;
     cursor: pointer;
 }
+.bg-layout{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+}
+.bg-layout .modal-layout{
+    width: 600px;
+    height: 270px;
+    background: #fff;
+    margin: 200px auto 0 auto;
+    box-shadow: 1px 1px 6px #5d5d5d;
+}
+.bg-layout .modal-layout .modal-title{
+    width: 100%;
+    height: 50px;
+}
+.bg-layout .modal-layout .modal-title a{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    float: right;
+    background-image: url("../assets/close.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+}
+.upload-input{
+    padding: 50px 50px 20px 50px;
+}
+.upload-input input{
+    display: inline-block;
+}
+.show-input{
+    padding: 25px 20px 0 50px;
+}
+.show-input input{
+    width: 80%;
+    padding: 8px;
+}
+
+
 .demo-options {
     margin-bottom: 10px;
 }
