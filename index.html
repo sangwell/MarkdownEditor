@@ -97,23 +97,63 @@
         },
         {
             id: 0,
-            text: '123'
+            text: 'Javascript'
         },
         {
             id: 1,
-            text: 'bug'
+            text: 'CSS'
         },
         {
             id: 2,
-            text: 'duplicate'
+            text: 'Html'
         },
         {
             id: 3,
-            text: 'invalid'
+            text: 'ES6'
         },
         {
             id: 4,
-            text: 'wontfix'
+            text: 'Android'
+        },
+        {
+            id: 5,
+            text: 'iOS'
+        },
+        {
+            id: 6,
+            text: 'APP'
+        },
+        {
+            id: 7,
+            text: 'Angular'
+        },
+        {
+            id: 8,
+            text: 'Vue'
+        },
+        {
+            id: 9,
+            text: 'React'
+        },
+        {
+            id: 10,
+            text: 'Mysql'
+        },
+        {
+            id: 11,
+            text: '阿里云'
+        },
+        {
+            id: 12,
+            text: 'Ionic'
+        },
+        {
+            id: 13,
+            text: 'Webpack'
+        },
+        {
+            id: 14,
+            text: 'npm'
         }
     ];
     $('.js-example-basic-single').select2({
@@ -152,9 +192,11 @@
             data: blogScheme,
             success: function (data) {
                 console.log(data);
+                alert('保存成功');
             },
             error:function (error) {
                 console.log(error);
+                alert('保存失败');
             }
         });
         console.log(blogScheme);
