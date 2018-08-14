@@ -32,7 +32,7 @@
             <li><a>标签</a></li>
             <li><a onclick="openFileUpload()">上传图片</a></li>
         </ul>
-        <a class="example-page">语法示例</a>
+        <a class="example-page" href="https://jonschlinkert.github.io/remarkable/demo/" target="_blank">语法示例</a>
     </div>
     <div class="row">
         <div class="col-xs-6">
@@ -73,15 +73,20 @@
             <a onclick="closeFileModal()"></a>
         </div>
         <div class="upload-input">
-            <input type="file" multiple>
-            <button>上传</button>
+            <input type="file" value="" multiple id="image_input"/>
+            <button type="button" onclick="uploadImages()">上传</button>
         </div>
         <div class="show-input">
-            <label>图片地址：</label><input type="text" readonly>
+            <label>图片地址：</label><textarea id="image_url_textarea"></textarea>
         </div>
     </div>
 </div>
 <script>
+    var backendBaseUrl='http://localhost:3000';
+    var blogApiBaseUrl=backendBaseUrl+'/blog',
+        uploadApiBaseUrl=backendBaseUrl+'/upload';
+    var blogAddUrl=blogApiBaseUrl+'/add',
+        uploadStoreUrl=backendBaseUrl+'/img/';
     var blogScheme = {
       Id:'',
       Title:'',
@@ -89,6 +94,7 @@
       Date:'',
       Tags:''
     };
+    blogScheme.Id = new Date().getTime();
 
     var data = [
         {
@@ -172,7 +178,6 @@
     
     function publish() {
         var source = $('.source').val();
-        blogScheme.Id = new Date().getTime();
         blogScheme.Title = document.getElementById('blog_title').value;
         blogScheme.Content = mdSrc.render(source);
         blogScheme.Date = moment().format('YYYY-MM-DD');
@@ -186,9 +191,10 @@
             alert('请填写完整！');
             return false;
         }
+        console.log(blogScheme);
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:3000/blog/add',
+            url: blogAddUrl,
             data: blogScheme,
             success: function (data) {
                 console.log(data);
@@ -199,7 +205,43 @@
                 alert('保存失败');
             }
         });
-        console.log(blogScheme);
+    }
+
+    function uploadImages() {
+        var Input = document.getElementById('image_input');
+        var files = !!Input.files ? Input.files : [];
+        if (!files.length || !window.FileReader) {
+            alert("请选择图片");
+            return false;
+        };
+        // 创建一个FormData对象,用来组装一组用 XMLHttpRequest发送请求的键/值对
+        var formData = new FormData();
+        // 把 input 标签获取的文件加入 FromData 中
+        for(var i = 0; i < files.length; i++){
+            formData.append('files', files[i]);
+        }
+        //Jquery Ajax
+        $.ajax({
+            url: uploadApiBaseUrl,
+            data: formData,
+            type: "POST",
+            dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                var url='';
+                result.forEach(function(imgUrl) {
+                    url+=uploadStoreUrl+imgUrl+'\n';
+                });
+                console.log(url);
+                document.getElementById('image_url_textarea').innerHTML=url;
+
+            },
+            error:function() {
+                alert('上传图片失败');
+            }
+        })
     }
 
 
@@ -531,6 +573,14 @@
         $(window).on('resize', function () {
             scrollMap = null;
         });
+
+        document.onkeydown=function()   {
+            if ((event.ctrlKey || event.metaKey) && event.keyCode == 83) {//Ctrl+S
+                event.returnvalue = false;
+                event.preventDefault();
+                publish();
+            }
+        };
 
         updateResult();
     });

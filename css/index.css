@@ -76,7 +76,7 @@ body {
 }
 .bg-layout .modal-layout{
     width: 600px;
-    height: 270px;
+    height: 330px;
     background: #fff;
     margin: 200px auto 0 auto;
     box-shadow: 1px 1px 6px #5d5d5d;
@@ -104,9 +104,11 @@ body {
 .show-input{
     padding: 25px 20px 0 50px;
 }
-.show-input input{
-    width: 80%;
-    padding: 8px;
+.show-input textarea{
+    width: 95%;
+    min-height: 100px;
+    resize: none;
+    overflow-y: scroll;
 }
 
 
@@ -247,4 +249,10 @@ body {
     display: inline-block;
     vertical-align: middle;
     width: auto;
+}
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #ccc!important;
+}
+.select2-dropdown {
+    border: 1px solid #ccc!important;
 }
