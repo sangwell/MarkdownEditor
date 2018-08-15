@@ -46,6 +46,9 @@ body {
 .js-example-basic-single{
     outline: none;
 }
+.select2-search__field{
+    cursor: pointer;
+}
 .btn-publish{
     width: 100%;
     border: none;

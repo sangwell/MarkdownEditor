@@ -54,7 +54,8 @@
             <div class="demo-control">
                 <a href="#" data-result-as="html">html</a>
                 <a href="#" data-result-as="src">source</a>
-                <a href="#" data-result-as="debug">debug</a></div>
+                <a href="#" data-result-as="debug">debug</a>
+            </div>
             <div class="result-html full-height"></div>
             <pre class="result-src full-height"><code class="result-src-content full-height"></code></pre>
             <pre class="result-debug full-height"><code class="result-debug-content full-height"></code></pre>
@@ -91,6 +92,7 @@
       Id:'',
       Title:'',
       Content:'',
+      Markdown:'',
       Date:'',
       Tags:''
     };
@@ -180,6 +182,7 @@
         var source = $('.source').val();
         blogScheme.Title = document.getElementById('blog_title').value;
         blogScheme.Content = mdSrc.render(source);
+        blogScheme.Markdown = document.getElementById('text-area').value;
         blogScheme.Date = moment().format('YYYY-MM-DD');
         var selected = $(".js-example-basic-single").select2("data");
         var tags = [];
@@ -192,7 +195,7 @@
             return false;
         }
         console.log(blogScheme);
-        $.ajax({
+        /*$.ajax({
             type: 'POST',
             url: blogAddUrl,
             data: blogScheme,
@@ -204,7 +207,7 @@
                 console.log(error);
                 alert('保存失败');
             }
-        });
+        });*/
     }
 
     function uploadImages() {
